@@ -7,7 +7,10 @@
       "sexo": "Macho",
       "idade": "2 anos",
       "porte": "Médio (14kg)",
-      "info": ["Vacinado", "Castrado"],
+      "info": [
+        "Vacinado",
+        "Castrado"
+      ],
       "status": "disponivel",
       "foto": null
     },
@@ -18,7 +21,11 @@
       "sexo": "Macho",
       "idade": "1 ano",
       "porte": "Pequeno",
-      "info": ["Vacinado", "Castrado", "FIV/FeLV neg."],
+      "info": [
+        "Vacinado",
+        "Castrado",
+        "FIV/FeLV neg."
+      ],
       "status": "disponivel",
       "foto": null
     },
@@ -29,7 +36,11 @@
       "sexo": "Macho",
       "idade": "3 anos",
       "porte": "Grande (26kg)",
-      "info": ["Vacinado", "Castrado", "Dócil"],
+      "info": [
+        "Vacinado",
+        "Castrado",
+        "Dócil"
+      ],
       "status": "disponivel",
       "foto": null
     },
@@ -40,9 +51,23 @@
       "sexo": "Macho",
       "idade": "3 meses",
       "porte": "Pequeno",
-      "info": ["Vacinado", "Aguarda castração"],
+      "info": [
+        "Vacinado",
+        "Aguarda castração"
+      ],
       "status": "disponivel",
       "foto": null
+    },
+    {
+      "id": "milo-1780680498203",
+      "nome": "Milo",
+      "foto": null,
+      "info": [],
+      "especie": "cachorro",
+      "sexo": "Macho",
+      "idade": "",
+      "porte": "",
+      "status": "disponivel"
     }
   ]
 }
