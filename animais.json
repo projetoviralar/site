@@ -1,0 +1,48 @@
+{
+  "animais": [
+    {
+      "id": "theo",
+      "nome": "Theo",
+      "especie": "cachorro",
+      "sexo": "Macho",
+      "idade": "2 anos",
+      "porte": "Médio (14kg)",
+      "info": ["Vacinado", "Castrado"],
+      "status": "disponivel",
+      "foto": null
+    },
+    {
+      "id": "felix",
+      "nome": "Felix",
+      "especie": "gato",
+      "sexo": "Macho",
+      "idade": "1 ano",
+      "porte": "Pequeno",
+      "info": ["Vacinado", "Castrado", "FIV/FeLV neg."],
+      "status": "disponivel",
+      "foto": null
+    },
+    {
+      "id": "rogerinho",
+      "nome": "Rogerinho",
+      "especie": "cachorro",
+      "sexo": "Macho",
+      "idade": "3 anos",
+      "porte": "Grande (26kg)",
+      "info": ["Vacinado", "Castrado", "Dócil"],
+      "status": "disponivel",
+      "foto": null
+    },
+    {
+      "id": "henry",
+      "nome": "Henry",
+      "especie": "gato",
+      "sexo": "Macho",
+      "idade": "3 meses",
+      "porte": "Pequeno",
+      "info": ["Vacinado", "Aguarda castração"],
+      "status": "disponivel",
+      "foto": null
+    }
+  ]
+}

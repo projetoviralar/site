@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projeto Vira-lar — Resgate e adoção responsável de cães e gatos na Zona Leste de São Paulo. Mais de 100 animais transformados desde 2020.">
+    <title>Projeto Vira-lar | Resgate e Adoção Responsável em SP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #F07878;
+            --primary-dark: #D95A5A;
+            --primary-light: #FFF5F5;
+            --primary-medium: #FFCECE;
+            --accent-yellow: #F7F7D0;
+            --accent-teal: #C2E8E4;
+            --text-dark: #7A2535;
+            --text-medium: #C4677A;
+            --text-body: #4A2028;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', sans-serif; color: var(--text-body); overflow-x: hidden; }
+
+        /* ─── PAW PATTERN BACKGROUNDS ─── */
+        .paw-bg {
+            background-color: var(--primary);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cellipse cx='45' cy='60' rx='18' ry='15' fill='rgba(255,255,255,0.07)'/%3E%3Cellipse cx='27' cy='38' rx='8' ry='7' fill='rgba(255,255,255,0.07)'/%3E%3Cellipse cx='40' cy='31' rx='8' ry='7' fill='rgba(255,255,255,0.07)'/%3E%3Cellipse cx='55' cy='31' rx='8' ry='7' fill='rgba(255,255,255,0.07)'/%3E%3Cellipse cx='65' cy='38' rx='8' ry='7' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
+        }
+        .paw-bg-light {
+            background-color: var(--primary-light);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90' viewBox='0 0 90 90'%3E%3Cellipse cx='45' cy='60' rx='18' ry='15' fill='rgba(240,120,120,0.08)'/%3E%3Cellipse cx='27' cy='38' rx='8' ry='7' fill='rgba(240,120,120,0.08)'/%3E%3Cellipse cx='40' cy='31' rx='8' ry='7' fill='rgba(240,120,120,0.08)'/%3E%3Cellipse cx='55' cy='31' rx='8' ry='7' fill='rgba(240,120,120,0.08)'/%3E%3Cellipse cx='65' cy='38' rx='8' ry='7' fill='rgba(240,120,120,0.08)'/%3E%3C/svg%3E");
+        }
+
+        /* ─── NAVBAR ─── */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 14px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 24px rgba(240,120,120,0.12);
+        }
+        .navbar-logo img { height: 38px; }
+        .navbar-logo-text {
+            font-family: 'Baloo 2', cursive;
+            font-weight: 800; font-size: 1.3rem; color: var(--text-dark);
+            text-decoration: none; display: flex; align-items: center; gap: 8px;
+        }
+        .navbar-logo-text i { color: var(--primary); }
+        .nav-links { display: flex; gap: 28px; list-style: none; align-items: center; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-dark);
+            font-weight: 700; font-size: 0.88rem; transition: color 0.25s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-links .cta {
+            background: var(--primary); color: white !important;
+            padding: 9px 22px; border-radius: 30px;
+            display: flex; align-items: center; gap: 8px;
+            transition: background 0.25s, transform 0.25s, box-shadow 0.25s !important;
+        }
+        .nav-links .cta:hover {
+            background: var(--primary-dark) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(240,120,120,0.4);
+        }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+        .hamburger span { width: 26px; height: 3px; background: var(--text-dark); border-radius: 3px; transition: all 0.3s; }
+
+        /* ─── BUTTONS ─── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 9px;
+            padding: 14px 34px; border-radius: 50px;
+            font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1rem;
+            text-decoration: none; cursor: pointer; border: none;
+            transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+        }
+        .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 18px rgba(240,120,120,0.35); }
+        .btn-primary:hover { background: var(--primary-dark); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(240,120,120,0.45); }
+        .btn-white { background: white; color: var(--primary); }
+        .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.15); }
+        .btn-outline-white { background: transparent; color: white; border: 2.5px solid white; }
+        .btn-outline-white:hover { background: white; color: var(--primary); transform: translateY(-3px); }
+        .btn-dark { background: var(--text-dark); color: white; }
+        .btn-dark:hover { background: #5a1a25; transform: translateY(-3px); }
+
+        /* ─── LAYOUT ─── */
+        section { padding: 90px 40px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        .center { text-align: center; }
+        .center .sub { margin-left: auto; margin-right: auto; }
+        .tag {
+            display: inline-block;
+            font-family: 'Baloo 2', cursive; font-weight: 700;
+            font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+            color: var(--primary); margin-bottom: 12px;
+        }
+        .tag.white { color: rgba(255,255,255,0.75); }
+        .tag.dark { color: var(--text-dark); opacity: 0.65; }
+        h2.title {
+            font-family: 'Baloo 2', cursive; font-weight: 800;
+            font-size: 2.5rem; color: var(--text-dark); line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        h2.title.white { color: white; }
+        .sub {
+            font-size: 1.05rem; line-height: 1.8;
+            color: var(--text-medium); max-width: 620px; margin-bottom: 44px;
+        }
+        .sub.white { color: rgba(255,255,255,0.85); }
+
+        /* ─── HERO ─── */
+        #hero { min-height: 100vh; padding: 130px 40px 80px; display: flex; align-items: center; }
+        #hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-text h1 {
+            font-family: 'Baloo 2', cursive; font-weight: 800;
+            font-size: 3rem; color: white; line-height: 1.2; margin-bottom: 22px;
+        }
+        .hero-text p { font-size: 1.15rem; color: rgba(255,255,255,0.9); line-height: 1.8; margin-bottom: 36px; }
+        .hero-text p strong { color: white; }
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+        .hero-img-wrap { display: flex; justify-content: center; }
+        .hero-img-wrap img { width: 100%; max-width: 460px; border-radius: 32px; box-shadow: 0 24px 70px rgba(0,0,0,0.22); }
+        .hero-placeholder {
+            width: 100%; max-width: 460px; height: 380px;
+            background: rgba(255,255,255,0.18); border-radius: 32px;
+            display: flex; align-items: center; justify-content: center; gap: 24px;
+        }
+        .hero-placeholder i { font-size: 5rem; color: rgba(255,255,255,0.7); }
+
+        /* ─── SOBRE ─── */
+        #sobre { background: var(--primary-light); }
+        #sobre .container { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+        .sobre-text p { font-size: 1.02rem; line-height: 1.85; color: var(--text-body); margin-bottom: 16px; }
+        .sobre-text p strong { color: var(--text-dark); }
+        .team { display: flex; gap: 28px; margin-top: 36px; }
+        .team-card { text-align: center; flex: 1; }
+        .team-card img {
+            width: 110px; height: 110px; border-radius: 50%;
+            object-fit: cover; object-position: top;
+            border: 4px solid var(--primary); margin-bottom: 12px;
+        }
+        .team-card .avatar {
+            width: 110px; height: 110px; border-radius: 50%;
+            background: var(--primary); display: flex; align-items: center;
+            justify-content: center; border: 4px solid var(--primary-medium);
+            margin: 0 auto 12px;
+        }
+        .team-card .avatar i { font-size: 2.5rem; color: white; }
+        .team-card h3 { font-family: 'Baloo 2', cursive; font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+        .team-card span { font-size: 0.85rem; color: var(--text-medium); }
+        .sobre-img img { width: 100%; border-radius: 24px; box-shadow: 0 12px 50px rgba(240,120,120,0.18); }
+        .sobre-img-placeholder {
+            width: 100%; height: 500px; background: var(--primary-medium);
+            border-radius: 24px; display: flex; align-items: center; justify-content: center;
+        }
+        .sobre-img-placeholder i { font-size: 5rem; color: var(--primary-dark); }
+
+        /* ─── IMPACTO ─── */
+        #impacto { background: white; }
+        .stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 48px; }
+        .stat {
+            background: var(--primary-light); border-radius: 22px; padding: 36px 24px;
+            text-align: center; border: 2px solid var(--primary-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .stat:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(240,120,120,0.18); }
+        .stat-icon { font-size: 2rem; color: var(--primary); margin-bottom: 14px; }
+        .stat-num {
+            font-family: 'Baloo 2', cursive; font-size: 2.8rem;
+            font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 8px;
+        }
+        .stat-label { font-size: 0.88rem; font-weight: 700; color: var(--text-dark); line-height: 1.4; }
+
+        /* ─── ANIMAIS ─── */
+        #animais { background: var(--primary-light); }
+        .animals-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 32px; margin-top: 48px; }
+        .animal-card {
+            background: white; padding: 14px 14px 22px; border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+            transform: rotate(-1.2deg); transition: all 0.3s; position: relative;
+        }
+        .animal-card:nth-child(2n) { transform: rotate(1.4deg); }
+        .animal-card:nth-child(3n) { transform: rotate(-0.6deg); }
+        .animal-card:hover { transform: rotate(0) translateY(-10px) scale(1.03); box-shadow: 0 22px 55px rgba(0,0,0,0.14); }
+        .pin {
+            position: absolute; top: -10px; right: 20px;
+            color: var(--primary); font-size: 1.2rem;
+        }
+        .animal-placeholder {
+            width: 100%; height: 190px; border-radius: 4px;
+            background: var(--primary-medium);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .animal-placeholder i { font-size: 3.5rem; color: var(--primary-dark); opacity: 0.6; }
+        .animal-card h3 {
+            font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 800;
+            color: var(--primary); margin-top: 14px; margin-bottom: 4px; text-transform: uppercase;
+        }
+        .animal-card p { font-size: 0.78rem; color: var(--text-medium); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; line-height: 1.5; }
+        .animals-footer { text-align: center; margin-top: 52px; }
+        .animals-footer p { color: var(--text-medium); margin-bottom: 20px; font-size: 0.95rem; }
+
+        /* ─── HISTÓRIAS ─── */
+        #historias { background: white; }
+        .historias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 24px; margin-top: 48px; }
+        .historia-card { position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 28px rgba(0,0,0,0.09); transition: transform 0.3s; }
+        .historia-card:hover { transform: translateY(-6px); }
+        .historia-foto { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .historia-placeholder { width: 100%; height: 200px; background: var(--accent-teal); display: flex; align-items: center; justify-content: center; }
+        .historia-placeholder i { font-size: 3rem; color: var(--text-dark); opacity: 0.4; }
+        .historia-badge {
+            position: absolute; top: 12px; left: 12px;
+            background: var(--text-dark); color: white;
+            font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 0.75rem;
+            padding: 4px 12px; border-radius: 20px;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .historia-info { padding: 14px 16px 18px; background: white; }
+        .historia-info h3 { font-family: 'Baloo 2', cursive; font-size: 1.2rem; font-weight: 800; color: var(--text-dark); margin-bottom: 4px; text-transform: uppercase; }
+        .historia-info p { font-size: 0.78rem; color: var(--text-medium); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+        #historias-vazio { text-align: center; padding: 48px; color: var(--text-medium); display: none; }
+
+        /* ─── COMO ADOTAR ─── */
+        #como-adotar { background: white; }
+        .steps { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; margin-top: 52px; position: relative; }
+        .steps::before {
+            content: ''; position: absolute; top: 34px; left: 8%; right: 8%;
+            height: 3px; background: var(--primary-medium); z-index: 0;
+        }
+        .step { text-align: center; position: relative; z-index: 1; }
+        .step-circle {
+            width: 68px; height: 68px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; margin: 0 auto 18px;
+            box-shadow: 0 6px 22px rgba(240,120,120,0.3);
+        }
+        .step h3 { font-family: 'Baloo 2', cursive; font-weight: 700; color: var(--text-dark); font-size: 0.98rem; margin-bottom: 8px; }
+        .step p { font-size: 0.82rem; color: var(--text-medium); line-height: 1.5; }
+        .adocao-note {
+            margin-top: 48px; padding: 28px 34px; background: var(--primary-light);
+            border-radius: 18px; border-left: 5px solid var(--primary);
+            max-width: 680px; margin-left: auto; margin-right: auto;
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .adocao-note i { font-size: 1.3rem; color: var(--primary); flex-shrink: 0; margin-top: 2px; }
+        .adocao-note p { font-size: 0.97rem; line-height: 1.75; color: var(--text-body); }
+        .adocao-cta { text-align: center; margin-top: 40px; }
+
+        /* ─── PET DE FDS ─── */
+        #pet-fds { background: var(--accent-teal); }
+        #pet-fds .container { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+        .fds-features { display: flex; flex-direction: column; gap: 18px; margin: 24px 0 32px; }
+        .fds-feat { display: flex; gap: 16px; align-items: flex-start; }
+        .fds-feat .ico { flex-shrink: 0; margin-top: 2px; }
+        .fds-feat .ico i { font-size: 1.3rem; color: var(--text-dark); }
+        .fds-feat p { font-size: 1rem; line-height: 1.65; color: var(--text-body); }
+        .fds-feat strong { color: var(--text-dark); }
+        .fds-img img { width: 100%; border-radius: 24px; box-shadow: 0 12px 50px rgba(0,0,0,0.12); }
+        .fds-img-placeholder {
+            width: 100%; height: 440px; background: rgba(255,255,255,0.4);
+            border-radius: 24px; display: flex; align-items: center; justify-content: center;
+        }
+        .fds-img-placeholder i { font-size: 5rem; color: var(--text-dark); opacity: 0.3; }
+
+        /* ─── FORMULÁRIOS ─── */
+        #formularios { background: white; }
+        .forms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+        .form-card {
+            background: var(--primary-light); border: 2px solid var(--primary-medium);
+            border-radius: 22px; padding: 36px 32px;
+            display: flex; flex-direction: column; gap: 14px; transition: all 0.3s;
+        }
+        .form-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 14px 44px rgba(240,120,120,0.14); }
+        .form-card .ico i { font-size: 2.2rem; color: var(--primary); }
+        .form-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.35rem; font-weight: 700; color: var(--text-dark); }
+        .form-card p { font-size: 0.93rem; line-height: 1.65; color: var(--text-medium); flex: 1; }
+        .form-card a { align-self: flex-start; margin-top: 4px; }
+
+        /* ─── APOIE ─── */
+        #apoie {
+            background: linear-gradient(135deg, var(--primary) 0%, #C94545 100%);
+            position: relative; overflow: hidden;
+        }
+        #apoie::after {
+            content: ''; position: absolute; right: -60px; bottom: -60px;
+            width: 280px; height: 280px; opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cellipse cx='50' cy='65' rx='22' ry='18' fill='white'/%3E%3Cellipse cx='28' cy='40' rx='10' ry='9' fill='white'/%3E%3Cellipse cx='44' cy='32' rx='10' ry='9' fill='white'/%3E%3Cellipse cx='60' cy='32' rx='10' ry='9' fill='white'/%3E%3Cellipse cx='74' cy='40' rx='10' ry='9' fill='white'/%3E%3C/svg%3E");
+            background-size: contain; background-repeat: no-repeat;
+            pointer-events: none;
+        }
+        .apoie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+        .apoie-card {
+            background: rgba(255,255,255,0.14); backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255,255,255,0.28); border-radius: 26px;
+            padding: 44px 40px; text-align: center; color: white; transition: all 0.3s;
+        }
+        .apoie-card:hover { background: rgba(255,255,255,0.22); transform: translateY(-6px); }
+        .apoie-card .ico i { font-size: 2.8rem; color: white; margin-bottom: 18px; display: block; }
+        .apoie-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.6rem; font-weight: 700; margin-bottom: 14px; }
+        .apoie-card p { font-size: 0.95rem; line-height: 1.75; opacity: 0.9; margin-bottom: 28px; }
+        .pix-box {
+            background: rgba(255,255,255,0.18); border: 2px dashed rgba(255,255,255,0.5);
+            border-radius: 12px; padding: 14px 20px; font-size: 0.92rem;
+            margin: 0 0 22px; word-break: break-all; color: white; font-weight: 700;
+        }
+        .apoie-note { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-top: 32px; text-align: center; }
+        .apoie-note a { color: white; font-weight: 700; text-decoration: none; }
+
+        /* ─── CUPONS ─── */
+        #cupons { background: var(--accent-yellow); }
+        .cupons-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; margin-top: 48px; }
+        .cupom-card {
+            background: white; border-radius: 22px; padding: 36px 28px;
+            text-align: center; box-shadow: 0 5px 28px rgba(0,0,0,0.07); transition: all 0.3s;
+        }
+        .cupom-card:hover { transform: translateY(-6px); box-shadow: 0 18px 48px rgba(0,0,0,0.11); }
+        .brand-ico {
+            width: 72px; height: 72px; border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 18px;
+        }
+        .brand-ico i { font-size: 2rem; }
+        .cupom-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.3rem; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+        .cupom-card p { font-size: 0.88rem; color: var(--text-medium); margin-bottom: 22px; line-height: 1.55; }
+        .cupom-badge {
+            display: inline-block; background: var(--primary); color: white;
+            font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1.1rem;
+            padding: 9px 28px; border-radius: 32px; letter-spacing: 2.5px;
+        }
+        .cupons-tip {
+            margin-top: 36px; text-align: center;
+            font-size: 0.9rem; color: var(--text-medium); font-style: italic;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .cupons-tip i { color: var(--primary); flex-shrink: 0; }
+
+        /* ─── REDES ─── */
+        #redes { background: white; }
+        .redes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 48px; }
+        .rede-card {
+            border-radius: 24px; padding: 48px 40px; text-align: center;
+            color: white; text-decoration: none; display: block; transition: all 0.3s;
+        }
+        .rede-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .rede-card.insta { background: linear-gradient(135deg, #f9ce34, #ee2a7b, #6228d7); }
+        .rede-card.tiktok { background: #010101; }
+        .rede-card .ico i { font-size: 2.6rem; color: white; margin-bottom: 16px; display: block; }
+        .rede-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+        .rede-card .num { font-family: 'Baloo 2', cursive; font-size: 2.8rem; font-weight: 800; margin: 8px 0; }
+        .rede-card p { font-size: 0.88rem; opacity: 0.8; }
+
+        /* ─── FOOTER ─── */
+        footer { background: var(--text-dark); color: white; padding: 70px 40px 32px; }
+        .footer-inner {
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 52px; padding-bottom: 44px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .footer-brand img { height: 48px; margin-bottom: 18px; display: block; }
+        .footer-brand-name {
+            font-family: 'Baloo 2', cursive; font-weight: 800;
+            font-size: 1.5rem; color: white; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .footer-brand-name i { color: var(--primary); }
+        .footer-brand p { font-size: 0.88rem; opacity: 0.7; line-height: 1.75; max-width: 270px; }
+        .footer-social { display: flex; gap: 10px; margin-top: 22px; }
+        .footer-social a {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: background 0.25s;
+        }
+        .footer-social a i { color: white; font-size: 1rem; }
+        .footer-social a:hover { background: var(--primary); }
+        .footer-col h4 { font-family: 'Baloo 2', cursive; font-size: 1rem; font-weight: 700; color: var(--primary-medium); margin-bottom: 20px; }
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .footer-col ul a { text-decoration: none; color: rgba(255,255,255,0.7); font-size: 0.87rem; transition: color 0.25s; }
+        .footer-col ul a:hover { color: white; }
+        .contact-line { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; color: rgba(255,255,255,0.7); margin-bottom: 12px; }
+        .contact-line i { color: var(--primary); flex-shrink: 0; margin-top: 2px; width: 14px; }
+        .footer-bottom { max-width: 1100px; margin: 0 auto; text-align: center; padding-top: 26px; font-size: 0.82rem; opacity: 0.5; }
+        .footer-bottom i { color: var(--primary); opacity: 1; }
+
+        /* ─── BACK TO TOP ─── */
+        #top-btn {
+            position: fixed; bottom: 28px; right: 28px;
+            width: 48px; height: 48px; background: var(--primary);
+            color: white; border: none; border-radius: 50%;
+            font-size: 1rem; cursor: pointer; display: none;
+            align-items: center; justify-content: center;
+            box-shadow: 0 4px 18px rgba(240,120,120,0.42);
+            transition: all 0.25s; z-index: 999;
+        }
+        #top-btn:hover { background: var(--primary-dark); transform: translateY(-3px); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 960px) {
+            section { padding: 70px 24px; }
+            #hero .container, #sobre .container, #pet-fds .container { grid-template-columns: 1fr; }
+            #hero .container { text-align: center; }
+            .hero-btns { justify-content: center; }
+            .hero-text h1 { font-size: 2.3rem; }
+            .hero-img-wrap { order: -1; }
+            .hero-img-wrap img { max-width: 300px; }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .steps { grid-template-columns: 1fr 1fr; }
+            .steps::before { display: none; }
+            .forms-grid { grid-template-columns: 1fr; }
+            .apoie-grid, .redes-grid { grid-template-columns: 1fr; }
+            .cupons-grid { grid-template-columns: 1fr 1fr; }
+            .footer-inner { grid-template-columns: 1fr 1fr; }
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; right: 0;
+                background: white; flex-direction: column; padding: 24px; gap: 16px;
+                box-shadow: 0 12px 36px rgba(0,0,0,0.1);
+            }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            h2.title { font-size: 2rem; }
+        }
+        @media (max-width: 600px) {
+            .cupons-grid { grid-template-columns: 1fr; }
+            .footer-inner { grid-template-columns: 1fr; }
+            .steps { grid-template-columns: 1fr; }
+            .sobre-text .team { flex-direction: column; align-items: center; }
+            h2.title { font-size: 1.75rem; }
+        }
+
+        /* ─── ANIMATIONS ─── */
+        .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+    <a href="#hero" class="navbar-logo">
+        <img
+            src="https://static.wixstatic.com/media/8cf9df_369aec943b3945eb99b76cef3cc5d56b~mv2.png/v1/fill/w_200,h_80,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/VIRALAR%20Preto.png"
+            alt="Projeto Vira-lar"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="navbar-logo-text" style="display:none">
+            <i class="fa-solid fa-paw"></i> Vira-lar
+        </span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#sobre">Nossa história</a></li>
+        <li><a href="#animais">Animais</a></li>
+        <li><a href="#historias">Histórias</a></li>
+        <li><a href="#pet-fds">Pet de FDS</a></li>
+        <li><a href="#apoie">Apoie</a></li>
+        <li><a href="#cupons">Cupons</a></li>
+        <li><a href="#formularios" class="cta"><i class="fa-solid fa-paw"></i> Quero adotar</a></li>
+    </ul>
+    <div class="hamburger" id="ham" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+
+<!-- ══ HERO ══ -->
+<section id="hero" class="paw-bg">
+    <div class="container">
+        <div class="hero-text fade-in">
+            <p style="font-family:'Baloo 2',cursive;font-size:1rem;font-weight:700;color:rgba(255,255,255,0.8);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;">Amor que vira lar</p>
+            <h1>Todo animal merece uma segunda chance. E um lar de verdade.</h1>
+            <p>Na Zona Leste de São Paulo, o Projeto Vira-lar resgata, acolhe e transforma histórias de cães e gatos em situação de abandono. Somos mãe e filha e, desde 2020, já ajudamos a mudar o destino de mais de <strong>250 vidas</strong> — com cuidado, responsabilidade e muito amor. Aqui, cada resgate é tratado como uma promessa: proteger, recuperar e encontrar uma família que ame para sempre.</p>
+            <div class="hero-btns">
+                <a href="#formularios" class="btn btn-outline-white">
+                    <i class="fa-solid fa-paw"></i> Quero Adotar
+                </a>
+                <a href="#apoie" class="btn btn-white">
+                    <i class="fa-solid fa-heart"></i> Quero Apoiar
+                </a>
+            </div>
+        </div>
+        <div class="hero-img-wrap fade-in">
+            <img
+                src="https://lh3.googleusercontent.com/d/1sfeFuYqAZ3_FoV_qSZ_Gx5djrBn4L3d4"
+                alt="Monica e Isabella com filhotes — Projeto Vira-lar"
+                style="object-fit:cover;object-position:top;"
+                onerror="this.src='https://drive.google.com/uc?export=view&id=1sfeFuYqAZ3_FoV_qSZ_Gx5djrBn4L3d4';this.onerror=null;">
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ NOSSA HISTÓRIA ══ -->
+<section id="sobre">
+    <div class="container">
+        <div class="sobre-text fade-in">
+            <p class="tag">Nossa história</p>
+            <h2 class="title">Nascemos do amor.<br>Crescemos pelo compromisso.</h2>
+            <p>O Projeto Vira-lar nasceu oficialmente em agosto de 2020, mas a nossa história com o resgate animal começou há mais de 15 anos.</p>
+            <p>Somos mãe e filha — <strong>Monica e Isabella</strong> — e, por muito tempo, resgatamos animais de forma independente, movidas pelo amor e pela vontade de mudar destinos. Com o tempo, percebemos que aquele cuidado precisava crescer, ganhar estrutura e alcançar ainda mais vidas. Foi assim que o Vira-lar nasceu: da decisão de transformar amor em compromisso.</p>
+            <p>Hoje, temos nosso próprio abrigo, já resgatamos mais de <strong>250 animais</strong> e seguimos oferecendo cuidado, tratamento, acolhimento e uma nova chance para cães e gatos em situação de abandono.</p>
+            <p>Mas nosso trabalho não termina no resgate. Buscamos famílias responsáveis, lares seguros e adoções feitas com consciência. Porque o nosso objetivo nunca foi encontrar "qualquer lar" — é encontrar <em>o lar certo</em>. Cada animal que passa por nós carrega uma história. E a nossa missão é garantir que ela termine com amor.</p>
+            <div class="team">
+                <div class="team-card">
+                    <img
+                        src="https://lh3.googleusercontent.com/d/1sfeFuYqAZ3_FoV_qSZ_Gx5djrBn4L3d4"
+                        alt="Monica e Isabella — Projeto Vira-lar"
+                        style="object-fit:cover;object-position:top left;"
+                        onerror="this.outerHTML='<div class=\'avatar\'><i class=\'fa-solid fa-user\'></i></div>'">
+                    <h3>Isabella Dias</h3>
+                    <span>Presidente &amp; Co-fundadora</span>
+                </div>
+                <div class="team-card">
+                    <img
+                        src="https://static.wixstatic.com/media/8cf9df_310c6dcfd494463291d7ab19ee88f783~mv2.jpg/v1/fill/w_300,h_340,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/8cf9df_310c6dcfd494463291d7ab19ee88f783~mv2.jpg"
+                        alt="Monica Rollo"
+                        onerror="this.outerHTML='<div class=\'avatar\'><i class=\'fa-solid fa-user\'></i></div>'">
+                    <h3>Monica Rollo</h3>
+                    <span>Co-fundadora</span>
+                </div>
+            </div>
+        </div>
+        <div class="sobre-img fade-in">
+            <img
+                src="https://static.wixstatic.com/media/8cf9df_4bf79de8b0e14bcab53fac9f858179b3~mv2.jpg/v1/fit/w_700,h_900,q_90,enc_avif,quality_auto/8cf9df_4bf79de8b0e14bcab53fac9f858179b3~mv2.jpg"
+                alt="Abrigo Vira-lar"
+                onerror="this.outerHTML='<div class=\'sobre-img-placeholder\'><i class=\'fa-solid fa-house\'></i></div>'">
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ IMPACTO ══ -->
+<section id="impacto">
+    <div class="container center fade-in">
+        <p class="tag">Nosso impacto</p>
+        <h2 class="title">Cada número é uma vida transformada</h2>
+        <p class="sub">Desde 2020, construímos uma comunidade apaixonada por animais — e os resultados falam por si.</p>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-icon"><i class="fa-solid fa-paw"></i></div>
+                <div class="stat-num">+250</div>
+                <div class="stat-label">Animais resgatados e adotados</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon"><i class="fa-brands fa-instagram"></i></div>
+                <div class="stat-num">15,9K</div>
+                <div class="stat-label">Seguidores no Instagram</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon"><i class="fa-brands fa-tiktok"></i></div>
+                <div class="stat-num">25,5K</div>
+                <div class="stat-label">Seguidores no TikTok</div>
+            </div>
+            <div class="stat">
+                <div class="stat-icon"><i class="fa-solid fa-eye"></i></div>
+                <div class="stat-num">300K</div>
+                <div class="stat-label">Visualizações mensais no Instagram</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ ANIMAIS PARA ADOÇÃO ══ -->
+<section id="animais" class="paw-bg-light">
+    <div class="container fade-in">
+        <div class="center">
+            <p class="tag">Adoção responsável</p>
+            <h2 class="title">Conheça quem espera por você</h2>
+            <p class="sub">Cada um tem sua história, sua personalidade e seu jeito único de amar. Eles só precisam de uma família.</p>
+        </div>
+        <div class="animals-grid" id="animaisGrid">
+            <!-- carregado dinamicamente de animais.json -->
+            <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-medium);">
+                <i class="fa-solid fa-paw" style="font-size:2rem;margin-bottom:12px;display:block;opacity:0.4;"></i>
+                Carregando animais...
+            </div>
+        </div>
+        <div class="animals-footer">
+            <p>Temos muito mais animais esperando por um lar — acompanhe pelo nosso Instagram!</p>
+            <a href="https://www.instagram.com/projetoviralar" target="_blank" class="btn btn-primary">
+                <i class="fa-brands fa-instagram"></i> Ver todos os animais
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ HISTÓRIAS ══ -->
+<section id="historias">
+    <div class="container fade-in">
+        <div class="center">
+            <p class="tag">Finais felizes</p>
+            <h2 class="title">Eles encontraram o lar certo</h2>
+            <p class="sub">Cada adoção é uma história de amor que começa. Esses são alguns dos bichinhos que passaram pelo Vira-lar e hoje têm uma família para chamar de sua.</p>
+        </div>
+        <div class="historias-grid" id="historiasGrid">
+            <!-- carregado dinamicamente -->
+        </div>
+        <div id="historias-vazio">
+            <i class="fa-solid fa-heart" style="font-size:2rem;color:var(--primary-medium);margin-bottom:12px;display:block;"></i>
+            As histórias de adoção aparecerão aqui em breve!
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ COMO ADOTAR ══ -->
+<section id="como-adotar">
+    <div class="container center fade-in">
+        <p class="tag">O processo</p>
+        <h2 class="title">Adoção responsável: porque cada lar importa</h2>
+        <p class="sub">No Vira-lar, adotar não é uma simples "doação de animal". É um processo cuidadoso para garantir o melhor match entre você e o seu novo companheiro.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-circle"><i class="fa-solid fa-clipboard-list"></i></div>
+                <h3>Formulário</h3>
+                <p>Preencha com informações sobre você, sua casa e rotina</p>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <h3>Análise</h3>
+                <p>Avaliamos e verificamos a compatibilidade com os animais</p>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fa-solid fa-house"></i></div>
+                <h3>Aprovação</h3>
+                <p>Verificamos fotos do ambiente e se é seguro para o bichinho</p>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fa-solid fa-handshake"></i></div>
+                <h3>Encontro</h3>
+                <p>Você vem ao abrigo conhecer o animal pessoalmente</p>
+            </div>
+            <div class="step">
+                <div class="step-circle"><i class="fa-solid fa-heart"></i></div>
+                <h3>Adoção!</h3>
+                <p>Novo capítulo começa, com acompanhamento da equipe</p>
+            </div>
+        </div>
+        <div class="adocao-note">
+            <i class="fa-solid fa-lightbulb"></i>
+            <p><strong>Atenção para tutores de gatos:</strong> somos muito criteriosos com telas de proteção, muros e rotas de fuga. A segurança total do animal é inegociável para nós. Antes de fechar a adoção, vamos conversar para garantir que o ambiente seja completamente seguro.</p>
+        </div>
+        <div class="adocao-cta">
+            <a href="#formularios" class="btn btn-primary">
+                <i class="fa-solid fa-clipboard-list"></i> Preencher formulário de adoção
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ PET DE FIM DE SEMANA ══ -->
+<section id="pet-fds">
+    <div class="container">
+        <div class="fade-in">
+            <p class="tag dark">Lar temporário</p>
+            <h2 class="title">Pet de Fim de Semana</h2>
+            <p style="font-size:1.05rem;color:var(--text-body);line-height:1.75;margin-bottom:6px;">Não está pronto para adotar de vez — mas quer fazer a diferença na vida de um bichinho? <strong>O Pet de Fim de Semana é para você!</strong></p>
+            <div class="fds-features">
+                <div class="fds-feat">
+                    <span class="ico"><i class="fa-solid fa-house-chimney"></i></span>
+                    <p><strong>Como funciona:</strong> você leva um animal para casa durante o fim de semana ou feriado prolongado, cuida com carinho e devolve ao abrigo na segunda-feira.</p>
+                </div>
+                <div class="fds-feat">
+                    <span class="ico"><i class="fa-solid fa-dog"></i></span>
+                    <p><strong>Para o animal:</strong> é uma chance de sentir o calor de um lar, interagir com pessoas e ambientes diferentes, e se desenvolver socialmente — o que faz toda a diferença no processo de adoção.</p>
+                </div>
+                <div class="fds-feat">
+                    <span class="ico"><i class="fa-solid fa-heart"></i></span>
+                    <p><strong>Para você:</strong> uma forma linda de ajudar sem compromisso permanente. Muitas vezes, o amor acontece e a adoção vem naturalmente!</p>
+                </div>
+                <div class="fds-feat">
+                    <span class="ico"><i class="fa-solid fa-clipboard-list"></i></span>
+                    <p><strong>Como participar:</strong> basta preencher o formulário, ter um ambiente seguro e comprometer-se com o cuidado durante o período combinado.</p>
+                </div>
+            </div>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfB0xNUkH6rO3F3umI98tTj7eFN_fCHp1PW0kIqs06W1PDnaQ/viewform" target="_blank" class="btn btn-dark">
+                <i class="fa-solid fa-paw"></i> Quero ser família temporária
+            </a>
+        </div>
+        <div class="fds-img fade-in">
+            <img
+                src="https://static.wixstatic.com/media/8cf9df_0835b4d989b64ebfbbc2be9fda77c3a4~mv2.jpg/v1/fit/w_700,h_900,q_90,enc_avif,quality_auto/8cf9df_0835b4d989b64ebfbbc2be9fda77c3a4~mv2.jpg"
+                alt="Pet de fim de semana"
+                onerror="this.outerHTML='<div class=\'fds-img-placeholder\'><i class=\'fa-solid fa-dog\'></i></div>'">
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ FORMULÁRIOS ══ -->
+<section id="formularios">
+    <div class="container fade-in">
+        <div class="center">
+            <p class="tag">Faça parte</p>
+            <h2 class="title">Cada ação transforma uma vida</h2>
+            <p class="sub">Seja adotando, acolhendo por um fim de semana, voluntariando ou ajudando em um resgate — você pode fazer a diferença.</p>
+        </div>
+        <div class="forms-grid">
+            <div class="form-card">
+                <div class="ico"><i class="fa-solid fa-paw"></i></div>
+                <h3>Formulário de Adoção</h3>
+                <p>Deu o match? Preencha o formulário e dê o primeiro passo para uma nova família. Avaliamos cada caso com cuidado para garantir o melhor para você e para o animal.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLScqETrwwfn-fVL8Nu2pyZVdwrVsCRlu2x5dU30B4UoNsUdCTg/viewform" target="_blank" class="btn btn-primary">
+                    Quero adotar <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="form-card">
+                <div class="ico"><i class="fa-solid fa-house-chimney"></i></div>
+                <h3>Pet de Fim de Semana</h3>
+                <p>Quer passar um fim de semana ou feriado com um bichinho? Registre seu interesse aqui. É uma forma incrível de ajudar e espalhar amor sem compromisso permanente.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfB0xNUkH6rO3F3umI98tTj7eFN_fCHp1PW0kIqs06W1PDnaQ/viewform" target="_blank" class="btn btn-primary">
+                    Quero acolher <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="form-card">
+                <div class="ico"><i class="fa-solid fa-hands-helping"></i></div>
+                <h3>Voluntariado</h3>
+                <p>Quer ajudar diretamente na rotina do projeto? Temos espaço para voluntários que amam animais e querem fazer a diferença com seu tempo e talento.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuiKCilbq53FnYlu5UgUa6y7ndWDJYglxpUGVFvk85EGS3Tg/viewform" target="_blank" class="btn btn-primary">
+                    Quero ser voluntário <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="form-card">
+                <div class="ico"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                <h3>Formulário de Resgate</h3>
+                <p>Encontrou um animal em situação de risco ou abandono? Preencha o formulário com os detalhes — nós avaliamos o caso e entramos em contato o quanto antes.</p>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSc6G5zLu65RqE2zddwnN_kkR8PuaCl_gZetYXZ2afZCdeSGAQ/viewform" target="_blank" class="btn btn-primary">
+                    Reportar animal <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ APOIE ══ -->
+<section id="apoie">
+    <div class="container center fade-in">
+        <p class="tag white">Apoie o projeto</p>
+        <h2 class="title white">Seu apoio transforma vidas</h2>
+        <p class="sub white">Cada doação paga vacinas, ração, consultas veterinárias, medicamentos e a estrutura do abrigo. Você pode ajudar com qualquer valor — e de forma recorrente.</p>
+        <div class="apoie-grid">
+            <div class="apoie-card">
+                <div class="ico"><i class="fa-solid fa-credit-card"></i></div>
+                <h3>Assinatura Mensal</h3>
+                <p>A assinatura mensal é a forma de apoio mais importante para nós — é um valor que conseguimos planejar e contar todo mês para garantir a continuidade dos cuidados. Com qualquer valor fixo, você se torna parte da nossa missão. Feito de forma simples e segura pelo <strong>Catarse</strong>, com cartão de crédito.</p>
+                <a href="https://www.catarse.com.br/username_1391046?ref=project_link" target="_blank" class="btn btn-outline-white" style="width:100%;justify-content:center;">
+                    <i class="fa-solid fa-heart"></i> Apoiar pelo Catarse
+                </a>
+            </div>
+            <div class="apoie-card">
+                <div class="ico"><i class="fa-solid fa-key"></i></div>
+                <h3>Doação via PIX</h3>
+                <p>Você pode fazer uma doação única ou, se quiser contribuir de forma contínua, configurar um <strong>PIX recorrente</strong> direto no seu banco — basta agendar a transferência mensal para nossa chave. Todo valor, grande ou pequeno, vai direto para os cuidados dos animais.</p>
+                <div class="pix-box">contato@projetoviralar.com.br</div>
+                <button onclick="copyPix(this)" class="btn btn-outline-white" style="width:100%;justify-content:center;">
+                    <i class="fa-regular fa-copy"></i> Copiar chave PIX
+                </button>
+                <p style="font-size:0.8rem;opacity:0.75;margin-top:12px;">
+                    <i class="fa-solid fa-rotate"></i> PIX recorrente: agende no seu banco toda semana, quinzena ou mês — sem precisar lembrar!
+                </p>
+            </div>
+        </div>
+        <p class="apoie-note">
+            Dúvidas? Fale com a gente pelo WhatsApp:
+            <a href="https://wa.me/5511919288284" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> (11) 91928-8284
+            </a>
+        </p>
+    </div>
+</section>
+
+
+<!-- ══ CUPONS ══ -->
+<section id="cupons">
+    <div class="container fade-in">
+        <div class="center">
+            <p class="tag">Parceiros</p>
+            <h2 class="title">Compre, economize e ajude!</h2>
+            <p class="sub">Nossos parceiros oferecem desconto exclusivo para a comunidade Vira-lar. Use o cupom e todo mundo ganha — inclusive os bichinhos!</p>
+        </div>
+        <div class="cupons-grid" style="grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto;">
+            <div class="cupom-card">
+                <div class="brand-ico" style="background:transparent;width:90px;height:90px;">
+                    <img src="https://cdn.awsli.com.br/2587/2587855/logo/dog-trip-brasil-logo-orb16e4ebr.png" alt="Dog Trip" style="width:80px;height:80px;border-radius:50%;object-fit:cover;">
+                </div>
+                <h3>Dog Trip</h3>
+                <p>Coleiras, guias e acessórios de qualidade para o seu cão. Produtos incríveis para passeios seguros e estilosos!</p>
+                <div class="cupom-badge" style="margin-bottom:18px;">VIRALAR</div>
+                <a href="https://www.dogtripbrasil.com.br/" target="_blank" class="btn btn-primary" style="font-size:0.88rem;padding:10px 24px;">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Visitar loja
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ REDES SOCIAIS ══ -->
+<section id="redes" style="background:#f9f9f9;">
+    <div class="container fade-in">
+        <div class="center">
+            <p class="tag">Comunidade</p>
+            <h2 class="title">Nos siga e acompanhe cada história</h2>
+            <p class="sub">Resgates, adoções, rotina do abrigo e muito amor. Nossa comunidade cresce a cada dia!</p>
+        </div>
+        <div class="redes-grid">
+            <a href="https://www.instagram.com/projetoviralar" target="_blank" class="rede-card insta">
+                <div class="ico"><i class="fa-brands fa-instagram"></i></div>
+                <h3>@projetoviralar.com</h3>
+                <div class="num">10,4K</div>
+                <p>seguidores &bull; 300K visualizações mensais</p>
+            </a>
+            <a href="https://www.tiktok.com/@projetoviralar" target="_blank" class="rede-card tiktok">
+                <div class="ico"><i class="fa-brands fa-tiktok"></i></div>
+                <h3>@projetoviralar</h3>
+                <div class="num">26K</div>
+                <p>seguidores &bull; 287K visualizações nos vídeos</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+<!-- ══ FOOTER ══ -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <img
+                src="https://static.wixstatic.com/media/8cf9df_29e261979c94492c81be48603f2ce136~mv2.png/v1/fill/w_213,h_86,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/VIRALAR%20Branco.png"
+                alt="Projeto Vira-lar"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <span class="footer-brand-name" style="display:none">
+                <i class="fa-solid fa-paw"></i> Projeto Vira-lar
+            </span>
+            <p>Transformando histórias de abandono em histórias de amor desde 2020. Zona Leste de São Paulo.</p>
+            <div class="footer-social">
+                <a href="https://www.instagram.com/projetoviralar" target="_blank" title="Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@projetoviralar" target="_blank" title="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100066913546442" target="_blank" title="Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://wa.me/5511919288284" target="_blank" title="WhatsApp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-col">
+            <h4>Navegação</h4>
+            <ul>
+                <li><a href="#sobre">Nossa história</a></li>
+                <li><a href="#impacto">Impacto</a></li>
+                <li><a href="#animais">Animais para adoção</a></li>
+                <li><a href="#como-adotar">Como adotar</a></li>
+                <li><a href="#pet-fds">Pet de FDS</a></li>
+                <li><a href="#cupons">Cupons parceiros</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Formulários</h4>
+            <ul>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScqETrwwfn-fVL8Nu2pyZVdwrVsCRlu2x5dU30B4UoNsUdCTg/viewform" target="_blank">Adoção</a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfB0xNUkH6rO3F3umI98tTj7eFN_fCHp1PW0kIqs06W1PDnaQ/viewform" target="_blank">Pet de Fim de Semana</a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSeuiKCilbq53FnYlu5UgUa6y7ndWDJYglxpUGVFvk85EGS3Tg/viewform" target="_blank">Voluntariado</a></li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc6G5zLu65RqE2zddwnN_kkR8PuaCl_gZetYXZ2afZCdeSGAQ/viewform" target="_blank">Resgate</a></li>
+                <li><a href="https://www.catarse.com.br/username_1391046?ref=project_link" target="_blank">Apoiar mensalmente</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contato</h4>
+            <div class="contact-line"><i class="fa-solid fa-envelope"></i> contato@projetoviralar.com.br</div>
+            <div class="contact-line"><i class="fa-brands fa-whatsapp"></i> (11) 91928-8284</div>
+            <div class="contact-line"><i class="fa-solid fa-location-dot"></i> Zona Leste de São Paulo</div>
+            <div style="margin-top:20px;">
+                <a href="https://www.catarse.com.br/username_1391046?ref=project_link" target="_blank" class="btn btn-primary" style="font-size:0.85rem;padding:10px 22px;">
+                    <i class="fa-solid fa-heart"></i> Apoiar
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 Projeto Vira-lar. Feito com <i class="fa-solid fa-heart"></i> por mãe e filha para os animais da Zona Leste de SP.</p>
+    </div>
+</footer>
+
+<button id="top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<script>
+/* ── Carregamento dinâmico dos animais ── */
+const ROTS = ['-1.2deg','1.4deg','-0.6deg','1deg','-0.8deg','1.2deg'];
+
+function cardAnimal(a, i) {
+    const foto = a.foto
+        ? `<img src="${a.foto}" alt="${a.nome}" class="animal-photo" onerror="this.outerHTML='<div class=\\'animal-placeholder\\'><i class=\\'fa-solid fa-${a.especie==='gato'?'cat':'dog'}\\'></i></div>'">`
+        : `<div class="animal-placeholder"><i class="fa-solid fa-${a.especie==='gato'?'cat':'dog'}"></i></div>`;
+    const info = Array.isArray(a.info) ? a.info.join(' · ') : a.info;
+    return `<div class="animal-card" style="transform:rotate(${ROTS[i%ROTS.length]})">
+        <i class="fa-solid fa-thumbtack pin"></i>
+        ${foto}
+        <h3>${a.nome}</h3>
+        <p>${a.sexo} · ${a.idade} · Porte ${a.porte}<br>${info}</p>
+    </div>`;
+}
+
+function cardHistoria(a) {
+    const foto = a.foto
+        ? `<img src="${a.foto}" alt="${a.nome}" class="historia-foto" onerror="this.outerHTML='<div class=\\'historia-placeholder\\'><i class=\\'fa-solid fa-${a.especie==='gato'?'cat':'dog'}\\'></i></div>'">`
+        : `<div class="historia-placeholder"><i class="fa-solid fa-${a.especie==='gato'?'cat':'dog'}"></i></div>`;
+    const info = Array.isArray(a.info) ? a.info.join(' · ') : a.info;
+    return `<div class="historia-card">
+        ${foto}
+        <div class="historia-badge"><i class="fa-solid fa-house"></i> Adotado!</div>
+        <div class="historia-info"><h3>${a.nome}</h3><p>${a.sexo} · Porte ${a.porte}</p></div>
+    </div>`;
+}
+
+async function loadAnimais() {
+    try {
+        const res = await fetch('animais.json?v=' + Date.now());
+        const data = await res.json();
+        const disponiveis = data.animais.filter(a => a.status === 'disponivel');
+        const adotados = data.animais.filter(a => a.status === 'adotado');
+
+        const grid = document.getElementById('animaisGrid');
+        grid.innerHTML = disponiveis.length
+            ? disponiveis.map(cardAnimal).join('')
+            : `<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--text-medium);">
+                <i class="fa-solid fa-paw" style="font-size:2rem;margin-bottom:12px;display:block;opacity:0.4;"></i>
+                Nenhum animal disponível no momento. Acompanhe pelo Instagram!
+               </div>`;
+
+        const hGrid = document.getElementById('historiasGrid');
+        const hVazio = document.getElementById('historias-vazio');
+        if (adotados.length) {
+            hGrid.innerHTML = adotados.map(cardHistoria).join('');
+            hVazio.style.display = 'none';
+        } else {
+            hGrid.innerHTML = '';
+            hVazio.style.display = 'block';
+        }
+    } catch(e) {
+        // Fallback silencioso — animais serão atualizados via painel
+        console.log('animais.json não encontrado ou erro de rede:', e.message);
+    }
+}
+
+loadAnimais();
+
+function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+}
+document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+function copyPix(btn) {
+    navigator.clipboard.writeText('contato@projetoviralar.com.br').then(() => {
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copiado!';
+        setTimeout(() => {
+            btn.innerHTML = '<i class="fa-regular fa-copy"></i> Copiar chave PIX';
+        }, 2200);
+    }).catch(() => {
+        alert('Chave PIX: contato@projetoviralar.com.br');
+    });
+}
+
+window.addEventListener('scroll', () => {
+    const btn = document.getElementById('top-btn');
+    btn.style.display = window.scrollY > 500 ? 'flex' : 'none';
+});
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
